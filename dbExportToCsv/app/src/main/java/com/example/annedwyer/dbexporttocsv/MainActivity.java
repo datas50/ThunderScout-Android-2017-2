@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.io.InputStreamReader;
 
 //This is a small example app that creates a database and exports it as a CSV.
 // This is a good training exercise.
@@ -25,6 +28,7 @@ public class MainActivity extends Activity implements OnClickListener {
     private static final String SAMPLE_TABLE_NAME = "Info";
     private static final String FILENAME = "dbDemo.csv"; //csv file that is created.
     private static final String DNAME = "demo"; //directory in the tablet where the file is put.
+    private static final String nameFile = "2015migul.txt";
 
 
     @Override
@@ -34,6 +38,7 @@ public class MainActivity extends Activity implements OnClickListener {
         findViewById(R.id.button1).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
+        findViewById(R.id.button4).setOnClickListener(this);
     }
 
     @Override
@@ -47,6 +52,9 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
             case R.id.button3:
                 createDB();
+                break;
+            case R.id.button4:
+                readJson();
                 break;
         }
     }
@@ -100,6 +108,37 @@ public class MainActivity extends Activity implements OnClickListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void readJson(){
+
+
+        File pathRoot = new File(Environment.getExternalStorageDirectory(), DNAME);
+
+
+            try {
+                File myFile = new File(pathRoot , nameFile);
+                FileInputStream fIn = new FileInputStream(myFile);
+                BufferedReader myReader = new BufferedReader(new InputStreamReader(fIn));
+                String aDataRow = "";
+                String totalData = "";
+                while ((aDataRow = myReader.readLine()) != null) {
+                    //Find the view by its id
+
+                    totalData += aDataRow + "\n";
+            //Set the text
+
+                }
+                myReader.close();
+                TextView tv = (TextView)findViewById(R.id.lineCode);
+                tv.setText(totalData);
+                Toast.makeText(getApplicationContext(), "File imported", Toast.LENGTH_LONG).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+
 
     }
 
