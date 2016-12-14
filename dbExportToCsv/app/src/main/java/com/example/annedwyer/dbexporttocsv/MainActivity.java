@@ -30,10 +30,15 @@ public class MainActivity extends Activity implements OnClickListener {
     private static final String DNAME = "demo"; //directory in the tablet where the file is put.
     private static final String nameFile = "2015migul.txt";
 
+    private DBHandler databaseHandler;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        databaseHandler = new DBHandler(this);
+
         setContentView(R.layout.activity_main);
         findViewById(R.id.button1).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
@@ -62,10 +67,9 @@ public class MainActivity extends Activity implements OnClickListener {
 
 
     private void deleteDB() {
-        boolean result = this.deleteDatabase(SAMPLE_DB_NAME);
-        if (result == true) {
-            Toast.makeText(this, "DB Deleted!", Toast.LENGTH_LONG).show();
-        }
+        SQLiteDatabase database = databaseHandler.getWritableDatabase();
+
+        database.
     }
 
 
@@ -101,6 +105,7 @@ public class MainActivity extends Activity implements OnClickListener {
             fileOutputStream.write(matchHeader.getBytes("UTF-8")); //writes header to the file.
             //writes first line to the file. In the app, the code must loop through through each row
             // of the database.
+
             fileOutputStream.write(firstLine.getBytes("UTF-8"));
             fileOutputStream.close();
 
