@@ -5,16 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="alliance test"/>
+
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:text="GET DATA"
+        android:layout_width="193dp"
         android:layout_height="wrap_content"
-        android:text="Import"
-        android:onClick="URLConnectionReader"/>
+        android:id="@+id/getApi" />
+
+    <Button
+        android:text="DELETE DATA"
+        android:layout_width="193dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/erase" />
+
+    <Button
+        android:text="EXPORT TO CSV"
+        android:layout_width="193dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/export" />
+
+
+
+    <ListView android:id="@+id/listView1" android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
 </LinearLayout>
